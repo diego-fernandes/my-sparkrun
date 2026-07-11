@@ -19,6 +19,12 @@ sparkrun recipe validate <recipe-name>
 sparkrun recipe vram <recipe-name>
 ```
 
+Give each recipe file a unique name across the sparkrun ecosystem — `sparkrun list`
+dedupes by filename stem, first-registry-wins, so a name collision with another
+registry's recipe (e.g. the built-in `official`/`sparkrun-transitional` ones) will
+silently hide yours from listings even though `recipe show`/`recipe search` still
+find it.
+
 ## Registering this repo
 
 ```bash

@@ -1,6 +1,6 @@
 recipe_version: "1"
-name: qwen3-1.7b-vllm
-description: Qwen3 1.7B -- small test model, solo or cluster
+name: example-qwen3-1.7b-vllm
+description: Qwen3 1.7B -- small test model, solo or cluster (starter template)
 
 model: Qwen/Qwen3-1.7B
 runtime: vllm-distributed
