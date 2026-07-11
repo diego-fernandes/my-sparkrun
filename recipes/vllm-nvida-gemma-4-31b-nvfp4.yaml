@@ -4,7 +4,6 @@ Runtime:      vllm-ray
 Model:        nvidia/Gemma-4-31B-IT-NVFP4
 Container:    vllm-node
 Nodes:        1 - unlimited
-recipe_version: "1"
 
 
 env: {}
