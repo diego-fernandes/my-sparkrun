@@ -1,10 +1,11 @@
-recipe_version: "1"
-name: Gemma-4-31B-NVFP4-nvidia
+name: @my-sparkrun/gemma-4-31B-nvfp4-nvidia
 Description:  vLLM serving nvidia/Gemma-4-31B-IT-NVFP4 with Marlin MoE backend
 Runtime:      vllm-ray
 Model:        nvidia/Gemma-4-31B-IT-NVFP4
 Container:    vllm-node
 Nodes:        1 - unlimited
+recipe_version: "1"
+
 
 env: {}
 solo_only: false
