@@ -1,22 +1,21 @@
 recipe_version: "1"
 name: Qwen36-35B-A3B-NVFP4-nvidia
-Description:  vLLM serving nvidia/Qwen3.6-35B-A3B-NVFP4 with Marlin MoE backend
-Runtime:      vllm-ray
-Model:        nvidia/Qwen3.6-35B-A3B-NVFP4
-Container:    vllm-node
-Nodes:        1 - unlimited
+description: vLLM serving nvidia/Qwen3.6-35B-A3B-NVFP4 with Marlin MoE backend
+model: nvidia/Qwen3.6-35B-A3B-NVFP4
+container: vllm-node
 
-Defaults:
+defaults:
   gpu_memory_utilization: 0.65
   host: 0.0.0.0
   max_model_len: 262144
+  max_num_batched_tokens: 32768
   max_num_seqs: 4
   port: 8000
 
-Environment:
-  VLLM_MARLIN_USE_ATOMIC_ADD=1
+env:
+  VLLM_MARLIN_USE_ATOMIC_ADD: '1'
 
-Command:
+command: |
   vllm serve nvidia/Qwen3.6-35B-A3B-NVFP4 \
   --host {host} \
   --port {port} \
@@ -38,4 +37,3 @@ Command:
   --tool-call-parser qwen3_xml \
   --enable-auto-tool-choice \
   --default-chat-template-kwargs '{"preserve_thinking":true}' \
-

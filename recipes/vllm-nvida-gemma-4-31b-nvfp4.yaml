@@ -1,26 +1,21 @@
-name: @my-sparkrun/gemma-4-31B-nvfp4-nvidia
-Description:  vLLM serving nvidia/Gemma-4-31B-IT-NVFP4 with Marlin MoE backend
-Runtime:      vllm-ray
-Model:        nvidia/Gemma-4-31B-IT-NVFP4
-Container:    vllm-node
-Nodes:        1 - unlimited
-
+recipe_version: "1"
+name: gemma-4-31B-nvfp4-nvidia
+description: vLLM serving nvidia/Gemma-4-31B-IT-NVFP4 with Marlin MoE backend
+model: nvidia/Gemma-4-31B-IT-NVFP4
+container: vllm-node-tf5
 
 env: {}
 solo_only: false
-model: nvidia/Gemma-4-31B-IT-NVFP4
 cluster_only: false
+mods: []
 defaults:
   max_model_len: 262144
   max_num_seqs: 4
   tensor_parallel: 1
-  gpu_memory_utilization: 0.90 
+  gpu_memory_utilization: 0.90
   port: 8000
   host: 0.0.0.0
   max_batch_tokens: 4096
-description: vLLM serving nvidia/Gemma-4-31B-IT-NVFP4
-mods: []
-container: vllm-node-tf5
 command: |
   vllm serve nvidia/Gemma-4-31B-IT-NVFP4  \
     --max-model-len {max_model_len} \
@@ -35,5 +30,4 @@ command: |
     --enable-auto-tool-choice \
     --tool-call-parser gemma4 \
     --reasoning-parser gemma4 \
-    -tp {tensor_parallel} 
-    
+    -tp {tensor_parallel}
