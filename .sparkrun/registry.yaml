@@ -1,0 +1,5 @@
+registries:
+  - name: my-sparkrun
+    description: Diego's personal sparkrun recipe registry
+    recipes: recipes
+    visible: true
