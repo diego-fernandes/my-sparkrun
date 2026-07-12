@@ -2,20 +2,21 @@ recipe_version: "1"
 name: gemma-4-31B-nvfp4-nvidia
 description: vLLM serving nvidia/Gemma-4-31B-IT-NVFP4 with Marlin MoE backend
 model: nvidia/Gemma-4-31B-IT-NVFP4
-container: vllm-node-tf5
+container: vllm-node
 
 env: {}
 solo_only: false
 cluster_only: false
 mods: []
 defaults:
-  max_model_len: 262144
-  max_num_seqs: 4
+  max_model_len: 160000
+  max_num_seqs: 1
   tensor_parallel: 1
   gpu_memory_utilization: 0.90
   port: 8000
   host: 0.0.0.0
   max_batch_tokens: 4096
+  block_size: 32
 command: |
   vllm serve nvidia/Gemma-4-31B-IT-NVFP4  \
     --max-model-len {max_model_len} \
@@ -23,6 +24,7 @@ command: |
     --port {port} \
     --host {host} \
     --max-num-seqs {max_num_seqs} \
+    --block-size {block_size} \
     --load-format fastsafetensors \
     --enable-prefix-caching \
     --enable-chunked-prefill \
