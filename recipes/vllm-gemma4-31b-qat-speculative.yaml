@@ -1,0 +1,25 @@
+name: gemma4-31b-qat-speculative
+description: Gemma-4 31B QAT FP4 with Speculative Decoding Assistant optimized for Blackwell Tensor Cores
+model: melcheikh/gemma-4-31B-it-qat-NVFP4-Blackwell
+
+runtime: vllm
+container: ghcr.io/spark-arena/dgx-vllm-eugr-nightly-tf5:latest
+defaults:
+  port: 8000
+  gpu_memory_utilization: 0.9
+  kv_cache_dtype: fp8
+  max_model_len: 160000
+  max_num_seqs: 1
+  max_num_batched_tokens: 4096
+command: |
+  vllm serve {model} \
+    --host 0.0.0.0 \
+    --port {defaults.port} \
+    --quantization {quantization} \
+    --gpu-memory-utilization {gpu_memory_utilization} \
+    --kv-cache-dtype {kv_cache_dtype} \
+    --max-model-len {max_model_len} \
+    --max-num-seqs {max_num_seqs} \
+    --max-num-batched-tokens {max_num_batched_tokens} \
+    --speculative-model {assistant_id} \
+    --enable-chunked-prefill true
