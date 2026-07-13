@@ -1,7 +1,7 @@
 recipe_version: "1"
 name: gemma-4-31B-nvfp4-redhat
 description: vLLM serving redhat/Gemma-4-31B-IT-NVFP4 
-model: redhat/Gemma-4-31B-IT-NVFP4
+model: RedHatAI/gemma-4-31B-it-NVFP4
 container: vllm-node
 
 env: {}
