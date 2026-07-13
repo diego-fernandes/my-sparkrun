@@ -4,7 +4,8 @@ description: vLLM serving redhat/Gemma-4-31B-IT-NVFP4
 model: RedHatAI/gemma-4-31B-it-NVFP4
 container: vllm-node
 
-env: {}
+env: 
+  HF_HUB_OFFLINE: 0 
 solo_only: false
 cluster_only: false
 mods: []

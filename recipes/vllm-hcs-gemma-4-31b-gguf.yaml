@@ -4,7 +4,6 @@ description: vLLM serving HauhauCS/Gemma4-31B-QAT-Uncensored-HauhauCS-Balanced-M
 model: HauhauCS/Gemma4-31B-QAT-Uncensored-HauhauCS-Balanced-MTP
 container: vllm-node
 
-env: {}
 solo_only: false
 cluster_only: false
 mods: []
@@ -16,7 +15,7 @@ defaults:
   port: 8000
   host: 0.0.0.0
 command: |
-  vllm serve HauhauCS/Gemma4-31B-QAT-Uncensored-HauhauCS-Balanced-MTP  \
+  vllm serve {model}  \
     --max-model-len {max_model_len} \
     --gpu-memory-utilization {gpu_memory_utilization} \
     --port {port} \
