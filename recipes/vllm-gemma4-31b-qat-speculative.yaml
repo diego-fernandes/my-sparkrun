@@ -4,11 +4,13 @@ model: melcheikh/gemma-4-31B-it-qat-NVFP4-mse-Blackwell
 
 runtime: vllm
 container: ghcr.io/spark-arena/dgx-vllm-eugr-nightly-tf5:latest
+env: 
+  HF_HUB_OFFLINE: 0 
 
 defaults:
   port: 8000
-  gpu_memory_utilization: 0.9
-  max_model_len: 160000
+  gpu_memory_utilization: 0.90
+  max_model_len: 200000
   max_num_seqs: 1
   kv_cache_dtype: fp8
 command: |
@@ -23,6 +25,5 @@ command: |
     --tool-call-parser gemma4 \
     --reasoning-parser gemma4 \
     --quantization modelopt_fp4 \
-    --enforce-eager
-    --spec-model melcheikh/gemma-4-31B-it-qat-assistant-NVFP4-mse-Blackwell \
-    --spec-tokens 3
+    --speculative-config '{"method": "mtp", "model": "melcheikh/gemma-4-31B-it-qat-assistant-NVFP4-mse-Blackwell", "num_speculative_tokens": 3 }' \
+    --enforce-eager \
