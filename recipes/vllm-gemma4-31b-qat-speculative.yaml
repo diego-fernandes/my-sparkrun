@@ -4,6 +4,7 @@ model: melcheikh/gemma-4-31B-it-qat-NVFP4-Blackwell
 
 runtime: vllm
 container: ghcr.io/spark-arena/dgx-vllm-eugr-nightly-tf5:latest
+
 defaults:
   port: 8000
   gpu_memory_utilization: 0.9
@@ -14,7 +15,7 @@ defaults:
 command: |
   vllm serve {model} \
     --host 0.0.0.0 \
-    --port {defaults.port} \
+    --port {port} \
     --quantization {quantization} \
     --gpu-memory-utilization {gpu_memory_utilization} \
     --kv-cache-dtype {kv_cache_dtype} \
