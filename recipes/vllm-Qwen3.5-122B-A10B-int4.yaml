@@ -4,15 +4,23 @@ defaults:
   port: 8000
   tensor_parallel: 1
 env: {}
+defaults:
+  max_model_len: 262144
+  max_num_seqs: 3
+  tensor_parallel: 1
+  gpu_memory_utilization: 0.90
+  port: 8000
+  host: 0.0.0.0
+  max_batch_tokens: 8192
 command: |
   vllm serve bleysg/Qwen3.5-122B-A10B-int4-fp8-hybrid \
-    --served-model-name "Cogni-Brain" \
-    --host 0.0.0.0 \
-    --port 8000 \
-    --max-model-len 262144 \
-    --max-num-seqs 3 \
-    --max-num-batched-tokens 8192 \
-    --gpu-memory-utilization 0.82 \
+    --served-model-name "Qwen3.5-122B-A10B" \
+    --host {host} \
+    --port {port} \
+    --max-model-len {max_model_len} \
+    --max-num-seqs {max_num_seqs} \
+    --max-num-batched-tokens {max_batch_tokens} \
+    --gpu-memory-utilization {gpu_memory_utilization} \
     --enable-prefix-caching \
     --enable-chunked-prefill \
     --trust-remote-code \
