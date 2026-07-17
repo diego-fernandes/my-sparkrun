@@ -1,0 +1,42 @@
+name: Gemma4-31B-IT-PrismaQuant
+cluster_only: false
+defaults:
+  max_num_batched_tokens: 8192
+  max_model_len: 262144
+  gpu_memory_utilization: 0.85
+  host: 0.0.0.0
+  num_speculative_tokens: 6
+  port: 8000
+  max_num_seqs: 4
+description: vLLM serving Gemma4-31B-IT-PrismaQuant
+recipe_version: '1'
+container: vllm-node-tf5
+model: rdtand/Gemma4-31B-IT-PrismaQuant-5.5bit-vllm
+solo_only: false
+build_args:
+  - '--tf5'
+command: |
+  vllm serve rdtand/Gemma4-31B-IT-PrismaQuant-5.5bit-vllm \
+    --served-model-name Gemma4-31B \
+    --max-model-len {max_model_len} \
+    --gpu-memory-utilization {gpu_memory_utilization} \
+    --port {port} \
+    --host {host} \
+    --load-format fastsafetensors \
+    --enable-prefix-caching \
+    --enable-auto-tool-choice \
+    --tool-call-parser gemma4 \
+    --reasoning-parser gemma4 \
+    --quantization compressed-tensors \
+    --kv-cache-dtype fp8 \
+    --max-num-batched-tokens {max_num_batched_tokens} \
+    --max-num-seqs {max_num_seqs} \
+    --enable-prefix-caching \
+    --enable-chunked-prefill \
+    --optimization-level 3 \
+    --performance-mode throughput \
+    --language-model-only \
+    --default-chat-template-kwargs '{{"preserve_thinking":true}}' \
+    --speculative-config '{{"method":"mtp","model":"google/gemma-4-31B-it-assistant","num_speculative_tokens":{num_speculative_tokens}}}' \
+env:
+  VLLM_NVFP4_GEMM_BACKEND: flashinfer-cutlass
